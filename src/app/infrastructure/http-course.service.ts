@@ -41,7 +41,7 @@ export class HttpCourseService {
     );
   }
 
-  update(course: CourseParams): Observable<CourseResponse> {
+  remove(course: CourseParams): Observable<CourseResponse> {
     return this.httpClient.put<CourseResponse>(this.baseUrl, course).pipe(
       timeout(this.TIMEOUT),
       catchError((err) => {
