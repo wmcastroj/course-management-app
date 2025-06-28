@@ -1,0 +1,22 @@
+<section
+  class="bg-[url('/assets/images/hero.png')] bg-cover bg-center h-[400px] flex items-start justify-center flex-col gap-y-4 px-4 md:px-[100px] lg:px-[150px]"
+>
+  <h2 class="text-white text-3xl lg:text-5xl font-bold w-50">
+    Aprende, crece y avanza
+  </h2>
+  <p class="text-white w-75">
+    Únete a miles de estudiantes y desbloquea tu potencial con cursos en línea
+    guiados por expertos.
+  </p>
+</section>
+<section class="py-18 flex flex-col gap-4 px-4 md:px-[100px] lg:px-[150px]">
+  <h3 class="text-3xl font-semibold">Featured courses</h3>
+  <p class="text-gray-700">Explore our Popular Courses</p>
+  <div
+    class="flex flex-col flex-wrap justify-center md:flex-row gap-4 md:gap-4 xl:justify-start xl:gap-6 items-center"
+  >
+    @for (course of courses(); track $index) {
+    <app-card [course]="course"></app-card>
+    }
+  </div>
+</section>
