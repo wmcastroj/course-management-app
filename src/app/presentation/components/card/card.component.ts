@@ -18,6 +18,12 @@ export class CardComponent {
     price: 0,
   };
 
+  randomPriceAddition = 0;
+
+  ngOnInit() {
+    this.randomPriceAddition = this.getRandomNumber();
+  }
+
   getRandomNumber(): number {
     return Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
   }

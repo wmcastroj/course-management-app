@@ -1,5 +1,5 @@
 <div
-  class="rounded-3xl w-[320px] md:w-[350px] border border-2 border-gray-300 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+  class="rounded-3xl w-[320px] md:w-[350px] border border-2 border-gray-300 overflow-hidden hover:shadow-xl transition-shadow duration-300 transition-transform hover:scale-105"
 >
   <div>
     <img src="/assets/images/default-course.png" alt="" />
@@ -7,7 +7,7 @@
   <div class="p-5">
     <div class="mb-4">
       <span class="text-teal-700">
-        <span class="text-gray-600">by</span> Netec</span
+        <span class="text-gray-600">Dirigido por</span> Netec</span
       >
       <h4 class="text-2xl font-semibold mt-3">
         {{ course.name }}
@@ -37,7 +37,7 @@
       <hr class="my-4 border border-gray-200" />
       <div class="flex flex-row gap-2">
         <span class="text-gray-500 line-through">{{
-          course.price + getRandomNumber()
+          course.price + randomPriceAddition
             | currency : "USD" : "symbol" : "1.0-0"
         }}</span>
         <span class="text-red-600">{{
