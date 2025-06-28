@@ -28,6 +28,7 @@ export class AddCourseComponent {
         },
         error: (err) => {
           console.error(err);
+          this.route.navigate(['/administracion']);
         },
       });
   }
