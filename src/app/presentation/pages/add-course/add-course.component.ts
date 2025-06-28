@@ -11,7 +11,6 @@ import { add } from '../../../store/course.actions';
   selector: 'app-add-course',
   imports: [FormComponent],
   templateUrl: './add-course.component.html',
-  styleUrl: './add-course.component.css',
 })
 export class AddCourseComponent {
   private service = inject(HttpCourseService);

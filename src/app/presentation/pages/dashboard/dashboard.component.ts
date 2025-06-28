@@ -10,7 +10,6 @@ import { remove } from '../../../store/course.actions';
   selector: 'app-dashboard',
   imports: [TableComponent, RouterLink],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
   private service = inject(HttpCourseService);

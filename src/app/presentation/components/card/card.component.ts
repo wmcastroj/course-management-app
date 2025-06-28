@@ -6,7 +6,6 @@ import { CourseParams } from '../../../domain/course.entity';
   selector: 'app-card',
   imports: [CurrencyPipe],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css',
 })
 export class CardComponent {
   @Input() course: CourseParams = {

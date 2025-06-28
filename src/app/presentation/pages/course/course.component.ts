@@ -9,7 +9,6 @@ import { CardComponent } from '../../components/card/card.component';
   selector: 'app-course',
   imports: [CardComponent],
   templateUrl: './course.component.html',
-  styleUrl: './course.component.css',
 })
 export class CourseComponent {
   private service = inject(HttpCourseService);

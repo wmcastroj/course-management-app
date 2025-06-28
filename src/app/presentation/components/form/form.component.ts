@@ -13,7 +13,6 @@ import { CourseParams } from '../../../domain/course.entity';
   selector: 'app-form',
   imports: [ReactiveFormsModule],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css',
 })
 export class FormComponent {
   @Input() course?: CourseParams;

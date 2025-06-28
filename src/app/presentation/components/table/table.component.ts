@@ -6,7 +6,6 @@ import { CurrencyPipe } from '@angular/common';
   selector: 'app-table',
   imports: [CurrencyPipe],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css',
 })
 export class TableComponent {
   @Input() courses: CourseParams[] = [
