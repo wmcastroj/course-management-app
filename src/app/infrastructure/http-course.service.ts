@@ -8,7 +8,7 @@ import { catchError, Observable, timeout } from 'rxjs';
 })
 export class HttpCourseService {
   private readonly TIMEOUT = 3000;
-  private readonly baseUrl = 'http://localhost:8084/course';
+  private readonly baseUrl = '/api/course';
   private httpClient: HttpClient = inject(HttpClient);
 
   getAll(): Observable<CourseResponse[]> {
