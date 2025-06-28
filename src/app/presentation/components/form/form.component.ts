@@ -1,10 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { HttpCourseService } from '../../../infrastructure/http-course.service';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CourseParams } from '../../../domain/course.entity';
-import { take } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { add } from '../../../store/course.actions';
 
 @Component({
   selector: 'app-form',
@@ -13,32 +16,26 @@ import { add } from '../../../store/course.actions';
   styleUrl: './form.component.css',
 })
 export class FormComponent {
-  private service = inject(HttpCourseService);
+  @Input() course?: CourseParams;
+  @Output() filled = new EventEmitter<CourseParams>();
+
   private build = inject(FormBuilder);
-  private store = inject(Store);
 
   form = this.build.group({
     name: [
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
     ],
-    description: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(120),
-      ],
-    ],
-    duration: [
-      '',
-      [Validators.required, Validators.min(1), Validators.max(120)],
-    ],
+    description: ['', [Validators.required, Validators.maxLength(120)]],
+    duration: ['', [Validators.required]],
     level: [
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
     ],
-    price: [, [Validators.required, Validators.min(0), Validators.max(5000)]],
+    price: [
+      '',
+      [Validators.required, Validators.min(1), Validators.max(99999999)],
+    ],
   });
 
   get nameIsInvalid() {
@@ -61,6 +58,22 @@ export class FormComponent {
     return this.form.controls.price.invalid;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['course'] && changes['course'].currentValue) {
+      this.getData();
+    }
+  }
+
+  private getData() {
+    this.form.patchValue({
+      name: this.course!.name,
+      description: this.course!.description,
+      duration: this.course!.duration,
+      level: this.course!.level,
+      price: String(this.course!.price),
+    });
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       return;
@@ -77,24 +90,10 @@ export class FormComponent {
       description: description,
       duration: duration,
       level: level,
-      price: price,
+      price: +price,
     };
 
-    this.service
-      .add(course)
-      .pipe(take(1))
-      .subscribe({
-        next: (newCourse) => {
-          this.addCourse(newCourse);
-          this.form.reset();
-        },
-        error: (err) => {
-          console.error(err);
-        },
-      });
-  }
-
-  private addCourse(course: CourseParams) {
-    this.store.dispatch(add({ course }));
+    this.filled.emit(course);
+    this.form.reset();
   }
 }
