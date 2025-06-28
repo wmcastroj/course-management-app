@@ -17,12 +17,13 @@ export class UpdateCourseComponent {
   private store = inject(Store);
   private route = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
+  private idCourse: number = 0;
 
   course!: CourseParams;
 
   ngOnInit(): void {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.getData(id);
+    this.idCourse = +this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.getData(this.idCourse);
   }
 
   private getData(id: number) {
@@ -30,26 +31,28 @@ export class UpdateCourseComponent {
       .getById(id)
       .pipe(take(1))
       .subscribe({
-        next: (courseData) => {
+        next: (courseData: CourseParams) => {
           this.course = courseData;
         },
-        error: (err) => {
+        error: (err: Error) => {
           console.error(err);
         },
       });
   }
 
   handleFilledForm(course: CourseParams) {
+    course = { ...course, id: this.idCourse };
     this.service
       .update(course)
       .pipe(take(1))
       .subscribe({
-        next: (updatedCourse) => {
+        next: (updatedCourse: CourseParams) => {
           this.updateCourse(updatedCourse);
           this.route.navigate(['/administracion']);
         },
         error: (err) => {
           console.error(err);
+          this.route.navigate(['/administracion']);
         },
       });
   }
