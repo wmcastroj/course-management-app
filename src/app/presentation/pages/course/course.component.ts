@@ -17,7 +17,7 @@ export class CourseComponent {
   courses = toSignal(
     this.service.getAll().pipe(
       catchError((err) => {
-        console.log(err);
+        console.error(err);
         return of([]);
       })
     ),
