@@ -1,0 +1,43 @@
+<table class="w-full text-sm text-left rtl:text-right text-gray-500">
+  <thead class="text-xs text-gray-700 capitalize bg-gray-50">
+    <tr>
+      <th scope="col" class="px-6 py-3">Nombre</th>
+      <th scope="col" class="px-6 py-3">Descripción</th>
+      <th scope="col" class="px-6 py-3">Duración</th>
+      <th scope="col" class="px-6 py-3">Nivel</th>
+      <th scope="col" class="px-6 py-3">Precio</th>
+      <th scope="col" class="px-6 py-3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (course of courses; track $index) {
+    <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+      <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+        {{ course.name }}
+      </td>
+      <td class="px-6 py-4">{{ course.description }}</td>
+      <td class="px-6 py-4">{{ course.duration }}</td>
+      <td class="px-6 py-4">{{ course.level }}</td>
+      <td class="px-6 py-4">
+        {{ course.price | currency : "USD" : "symbol" : "1.0-0" }}
+      </td>
+      <td>
+        <div class="flex flex-col md:flex-row gap-4 md:gap-8 w-fit">
+          <button
+            class="w-[16px] cursor-pointer transition-transform duration-300 hover:scale-200"
+            (click)="onUpdate(course.id!)"
+          >
+            <img src="/assets/icons/edit.svg" alt="Actualizar curso" />
+          </button>
+          <button
+            class="w-[16px] cursor-pointer transition-transform duration-300 hover:scale-200"
+            (click)="onRemove(course.id!)"
+          >
+            <img src="/assets/icons/trash.svg" alt="Eliminar curso" />
+          </button>
+        </div>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
